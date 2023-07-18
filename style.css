@@ -71,7 +71,7 @@ li {
   position: relative;
   top: -28px;
 }
-.description {
+#description::first-letter {
   text-transform: capitalize;
 }
 .unit .active {
