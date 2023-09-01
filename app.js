@@ -37,10 +37,23 @@ function displayWeather(response) {
   descriptionItem.innerHTML = response.data.condition.description;
   dateItem.innerHTML = formatDate(response.data.time * 1000);
   iconItem.setAttribute("src", `${response.data.condition.icon_url}`);
-  iconItem.setAttribute("alt", response.data.condition.description)
+  iconItem.setAttribute("alt", response.data.condition.description);
 }
 
-let appKey = "bfot5b9073814ac4cad9fb1fee3aac2c";
-let appUrl = `https://api.shecodes.io/weather/v1/current?query=London&key=${appKey}&units=metric`;
+function search(city) {
+  let appKey = "bfot5b9073814ac4cad9fb1fee3aac2c";
+  let appUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${appKey}&units=metric`;
 
-axios.get(appUrl).then(displayWeather);
+  axios.get(appUrl).then(displayWeather);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#city_search");
+  search(cityInput.value);
+}
+
+let formItem = document.querySelector("#form");
+formItem.addEventListener("submit", handleSubmit);
+
+search("New York");
